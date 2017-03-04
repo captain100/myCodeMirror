@@ -5,15 +5,109 @@
   <title>在线编辑器</title>
   <script src="lib/codemirror.js"></script>
   <link rel="stylesheet" href="lib/codemirror.css">
+  <link rel="stylesheet" href="theme/solarized.css">
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      height: 40px;
+      width: 100%;
+      border-bottom: 1px solid #000;
+    }
+    #eidtor {
+      border: 0;
+      height: 100%;
+    }
+  </style>
 </head>
 
 <body>
-  <textarea id="eidor"></textarea>
-  <script src="mode/javascript/javascript.js"></script>
-  <script>
-    var myCodeMirror = CodeMirror(document.getElementById('eidor'), {
-      lineNumbers: true
+  <div class="header">
+    选择代码样式
+    <select id="select">
+      <option value="default" >default</option>
+      <option>3024-day</option>
+      <option>3024-night</option>
+      <option>abcdef</option>
+      <option>ambiance</option>
+      <option>base16-dark</option>
+      <option>base16-light</option>
+      <option>bespin</option>
+      <option>blackboard</option>
+      <option>cobalt</option>
+      <option>colorforth</option>
+      <option>dracula</option>
+      <option>duotone-dark</option>
+      <option>duotone-light</option>
+      <option>eclipse</option>
+      <option>elegant</option>
+      <option>erlang-dark</option>
+      <option>hopscotch</option>
+      <option>icecoder</option>
+      <option>isotope</option>
+      <option>lesser-dark</option>
+      <option>liquibyte</option>
+      <option>material</option>
+      <option>mbo</option>
+      <option>mdn-like</option>
+      <option>midnight</option>
+      <option>monokai</option>
+      <option>neat</option>
+      <option>neo</option>
+      <option>night</option>
+      <option>panda-syntax</option>
+      <option>paraiso-dark</option>
+      <option>paraiso-light</option>
+      <option>pastel-on-dark</option>
+      <option>railscasts</option>
+      <option>rubyblue</option>
+      <option>seti</option>
+      <option selected="">solarized dark</option>
+      <option>solarized light</option>
+      <option>the-matrix</option>
+      <option>tomorrow-night-bright</option>
+      <option>tomorrow-night-eighties</option>
+      <option>ttcn</option>
+      <option>twilight</option>
+      <option>vibrant-ink</option>
+      <option>xq-dark</option>
+      <option>xq-light</option>
+      <option>yeti</option>
+      <option>zenburn</option>
+    </select>
+    <button>显示结果</button>    
+</div>
+<div id="eidtor"></div>
+
+</iframe>
+<script type="text/javascript" src="mode/javascript/javascript.js"></script>
+<script type="text/javascript">
+    var el = document.getElementById('eidtor')
+    var selectEl = document.getElementById('select') 
+    var myCodeMirror = CodeMirror(el, {
+      value: "function myScript(){return 100;}",
+      mode: "text/javascript",
+      lineNumbers: true,
+      theme: 'solarized dark',
+      indentUnit: 2,
+      smartIndent: true,
+      tabSize: 2,
     });
+
+    // 监听select变化 改变 code 的 theme (主题)
+    selectEl.addEventListener('change', function(){
+      var fileName = selectEl.options[selectEl.selectedIndex].innerText
+      var link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.type = 'text/css'
+      link.href = 'theme/'+ fileName +'.css'
+      document.head.appendChild(link);
+      myCodeMirror.setOption('theme', fileName)
+    })
+
+
   </script>
 </body>
 
