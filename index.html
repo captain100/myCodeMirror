@@ -5,18 +5,16 @@
   <title>在线编辑器</title>
   <script src="lib/codemirror.js"></script>
   <link rel="stylesheet" href="lib/codemirror.css">
-
 </head>
 
 <body>
   <textarea id="eidor"></textarea>
   <script src="mode/javascript/javascript.js"></script>
   <script>
-    var myCodeMirror = CodeMirror(document.getElementsByTagName('textarea')[0], {
+    var myCodeMirror = CodeMirror(document.getElementById('eidor'), {
       lineNumbers: true
     });
   </script>
-
 </body>
 
 </html>
