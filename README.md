@@ -46,5 +46,31 @@ CodeMirror是一款在线的支持语法高亮的代码编辑器。官网： (ht
 
 </html>
 ```
+# 添加theme样式
+```
+ var el = document.getElementById('eidtor')
+    var selectEl = document.getElementById('select') 
+    var myCodeMirror = CodeMirror(el, {
+      value: "function myScript(){return 100;}",
+      mode: "text/javascript",
+      lineNumbers: true,
+      theme: 'solarized dark',
+      indentUnit: 2,
+      smartIndent: true,
+      tabSize: 2,
+    });
+
+    // 监听select变化 改变 code 的 theme (主题)
+    selectEl.addEventListener('change', function(){
+      var fileName = selectEl.options[selectEl.selectedIndex].innerText
+      var link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.type = 'text/css'
+      link.href = 'theme/'+ fileName +'.css'
+      document.head.appendChild(link);
+      myCodeMirror.setOption('theme', fileName)
+    })
+```
+
 # 参考文档
 [在线代码编辑器 CODEMIRROR 配置说明](http://www.hyjiacan.com/codemirror-config/)
